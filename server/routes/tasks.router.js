@@ -40,4 +40,19 @@ router.get('/', (req, res) => {
       });
   });
 
+router.put('/:id', (req, res) => {
+    let task = req.body;
+    let id = req.params.id;
+    console.log(`marking for transfer ${id}`, task);
+    let queryText = `UPDATE "tasks" SET "complete" = 'Yes' WHERE "id" = $1;`;
+    pool.query(queryText, [id])
+      .then((result) => {
+        console.log('DB should update', result);
+        res.sendStatus(200);
+      }).catch((er) => {
+        console.log("Error from put", err);
+        res.sendStatus(500);
+      })
+  });
+
 module.exports = router;

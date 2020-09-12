@@ -6,6 +6,7 @@ function onReady() {
     getTasks()
     //on click event call makeTask
     $(document).on('click', '#submitBtn', makeTask);
+    $(document).on('click', '#completedBtn', markAsCompleted);
 }
 
 function makeTask() {
@@ -65,5 +66,22 @@ function getTasks() {
 
 }
 
+function markAsCompleted() {
+    let id = $(this).data('id');
+    console.log('task-id of task to complete', id);
+    $.ajax({
+        method: 'PUT',
+        url: `/tasks/${id}`,
+        data: {
+            complete: "Yes"
+        }
+    }).then(function (response) {
+        console.log('response from transfer', response);
+        getTasks();
+    }).catch(function (err) {
+        console.log("error in setting transfer", err);
+        alert("something went wrong");
+    })
+}
 
 
