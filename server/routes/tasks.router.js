@@ -16,9 +16,9 @@ router.post('/', (req, res) => {
     let task = req.body;
     console.log(`Adding task`, task);
 
-    let queryText = `INSERT INTO "tasks" ("name", "age", "task", "type")
-    VALUES ($1, $2, $3, $4);`;
-    pool.query(queryText, [task.name, task.age, task.task, task.type])
+    let queryText = `INSERT INTO "tasks" ("name", "age", "task", "type", "complete")
+    VALUES ($1, $2, $3, $4, $5);`;
+    pool.query(queryText, [task.name, task.age, task.task, task.type, task.complete])
         .then(result => {
             res.sendStatus(201);
         })
@@ -27,5 +27,17 @@ router.post('/', (req, res) => {
             res.sendStatus(500);
         });
 });
+
+router.get('/', (req, res) => {
+    let queryText = 'SELECT * FROM "tasks" ORDER BY "id";';
+    pool.query(queryText).then(result => {
+      // Sends back the results in an object
+      res.send(result.rows);
+    })
+      .catch(error => {
+        console.log('error getting tasks', error);
+        res.sendStatus(500);
+      });
+  });
 
 module.exports = router;
