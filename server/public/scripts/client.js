@@ -7,6 +7,7 @@ function onReady() {
     //on click event call makeTask
     $(document).on('click', '#submitBtn', makeTask);
     $(document).on('click', '#completedBtn', markAsCompleted);
+    $(document).on('click', '#deleteBtn', deleteTask);
 }
 
 function makeTask() {
@@ -51,17 +52,24 @@ function getTasks() {
         console.log(`this is our response`, response);
         for(let i=0; i<response.length; i++){
             task = response[i];
-            $('#tasksOut').append(`<tr>
+            if(task.complete === 'Yes') {
+                $('#task').addClass('completed');
+            }
+            else if(response.complete === 'No' ){
+                $('#task').addClass('uncompleted');
+            }
+            $('#tasksOut').append(`<tr id="task">
             <td>${task.name}</td>
             <td>${task.age}</td>
             <td>${task.task}</td>
             <td>${task.type}</td>
-            <td>${task.complete}</td>
+            <td class="task">${task.complete}</td>
             <td><button id="completedBtn" data-id="${task.id}">Completed</button></td>
             <td><button id="deleteBtn" data-id="${task.id}">Delete</button></td>
-            </tr>`)
-            
+            </tr>`);
         }
+    }).catch(function (error) {
+        console.log('error in POST', error);
     })
 
 }
@@ -78,10 +86,28 @@ function markAsCompleted() {
     }).then(function (response) {
         console.log('response from transfer', response);
         getTasks();
+
     }).catch(function (err) {
         console.log("error in setting transfer", err);
         alert("something went wrong");
     })
 }
+function deleteTask() {
 
+    console.log('made it into deleteTask');
+    let taskId = $(this).data('id');
+    console.log('this is the id number of this koala', taskId)
+    $.ajax({
+    method: 'DELETE',
+    url: `/tasks/${taskId}` 
+    }).then( function( response ){
+    console.log("Deleted!", response);
+    // Refresh page (aka do another GET request)
+    getTasks();
+    }).catch( function(err){
+    console.log("Error in delete", err);
+    alert("had an error in deleteTask");
+    });
+    
+}
 
