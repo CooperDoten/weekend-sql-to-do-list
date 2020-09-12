@@ -13,11 +13,11 @@ function onReady() {
 function makeTask() {
     //create object to send to POST
     let task = {
-        name: $('#nameIn').val(),
-        age: $('#ageIn').val(),
-        task: $('#taskIn').val(),
-        complete: $('#completeIn').val(),
-        type: $('#typeIn').val()
+            name: $('#nameIn').val(),
+            age: $('#ageIn').val(),
+            task: $('#taskIn').val(),
+            complete: $('#completeIn').val(),
+            type: $('#typeIn').val()
     }
     //call function to send object to POST
     taskToPost(task);
@@ -53,20 +53,18 @@ function getTasks() {
         for(let i=0; i<response.length; i++){
             task = response[i];
             $('#tasksOut').append(`<tr class="${task.complete}">
-            <td>${task.name}</td>
-            <td>${task.age}</td>
-            <td>${task.task}</td>
-            <td>${task.type}</td>
-            <td id="complete">${task.complete}</td>
-            <td><button id="completedBtn" data-id="${task.id}">Complete</button></td>
-            <td><button id="deleteBtn" data-id="${task.id}">Delete</button></td>
+                <td>${task.name}</td>
+                <td>${task.age}</td>
+                <td>${task.task}</td>
+                <td>${task.type}</td>
+                <td id="complete">${task.complete}</td>
+                <td><button id="completedBtn" data-id="${task.id}">Complete</button></td>
+                <td><button id="deleteBtn" data-id="${task.id}">Delete</button></td>
             </tr>`);
         }
-
     }).catch(function (error) {
-        console.log('error in POST', error);
+            console.log('error in POST', error);
     })
-
 }
 
 function markAsCompleted() {
@@ -87,7 +85,6 @@ function markAsCompleted() {
     })
 }
 function deleteTask() {
-
     console.log('made it into deleteTask');
     let taskId = $(this).data('id');
     console.log('this is the id number of this koala', taskId)
@@ -102,6 +99,5 @@ function deleteTask() {
     console.log("Error in delete", err);
     alert("had an error in deleteTask");
     });
-    
 }
 
