@@ -1,6 +1,19 @@
-.completed{
-    background-color: lightblue;
+.Yes{
+    background-color: #C9E19C;
 }
-.uncompleted{
-    background-color: lightcoral;
+.No{
+    background-color: #FF9E9D;
+}
+body{
+    color: white;
+    background-color: #CBC1C7;
+}
+th{
+    color: white;
+}
+table{
+    text-align: center;
+}
+#inputDiv{
+    text-align: center;
 }

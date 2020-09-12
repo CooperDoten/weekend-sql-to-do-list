@@ -52,22 +52,17 @@ function getTasks() {
         console.log(`this is our response`, response);
         for(let i=0; i<response.length; i++){
             task = response[i];
-            if(task.complete === 'Yes') {
-                $('#task').addClass('completed');
-            }
-            else if(response.complete === 'No' ){
-                $('#task').addClass('uncompleted');
-            }
-            $('#tasksOut').append(`<tr id="task">
+            $('#tasksOut').append(`<tr class="${task.complete}">
             <td>${task.name}</td>
             <td>${task.age}</td>
             <td>${task.task}</td>
             <td>${task.type}</td>
-            <td class="task">${task.complete}</td>
-            <td><button id="completedBtn" data-id="${task.id}">Completed</button></td>
+            <td id="complete">${task.complete}</td>
+            <td><button id="completedBtn" data-id="${task.id}">Complete</button></td>
             <td><button id="deleteBtn" data-id="${task.id}">Delete</button></td>
             </tr>`);
         }
+
     }).catch(function (error) {
         console.log('error in POST', error);
     })
@@ -86,7 +81,6 @@ function markAsCompleted() {
     }).then(function (response) {
         console.log('response from transfer', response);
         getTasks();
-
     }).catch(function (err) {
         console.log("error in setting transfer", err);
         alert("something went wrong");
