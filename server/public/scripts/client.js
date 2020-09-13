@@ -58,8 +58,8 @@ function getTasks() {
                 <td>${task.task}</td>
                 <td>${task.type}</td>
                 <td id="complete">${task.complete}</td>
-                <td><button id="completedBtn" data-id="${task.id}">Complete</button></td>
-                <td><button id="deleteBtn" data-id="${task.id}">Delete</button></td>
+                <td><button class="Yes" id="completedBtn" data-id="${task.id}">Complete</button></td>
+                <td><button class="No" id="deleteBtn" data-id="${task.id}">Delete</button></td>
             </tr>`);
         }
     }).catch(function (error) {
@@ -87,7 +87,7 @@ function markAsCompleted() {
 function deleteTask() {
     console.log('made it into deleteTask');
     let taskId = $(this).data('id');
-    console.log('this is the id number of this koala', taskId)
+    console.log('this is the id number of this task', taskId)
     $.ajax({
     method: 'DELETE',
     url: `/tasks/${taskId}` 

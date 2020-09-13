@@ -12,30 +12,32 @@
     <link rel="stylesheet" href="./styles/style.css">
 </head>
 <body>
-    <div id="inputDiv">
+    <div class="container-fluid" id="inputDiv">
         <h2>Task to Complete: </h2>
-        <input type="text" id="nameIn" placeholder="Name">
-        <input type="number" id="ageIn" placeholder="Age">
-        <input type="text" id="taskIn" placeholder="Task To Do">
-        <label for="typeIn">Type: </label>
-        <select id="typeIn">
-            <option>--------</option>
-            <option>Physical Activity</option>
-            <option>Relaxation</option>
-            <option>Eating</option>
-            <option>Coding</option>
-            <option>Chore</option>
-            <option>Other</option>
-        </select>
-        <label for="completeIn">Task Completed: </label>
-        <select id="completeIn">
-            <option>--------</option>
-            <option>Yes</option>
-            <option>No</option>
-        </select>
-        <button id="submitBtn">Submit</button>
+        <form  class="form-group">
+            <input class="form-control" type="text" id="nameIn" placeholder="Name">
+            <input class="form-control" type="number" id="ageIn" placeholder="Age">
+            <input class="form-control" type="text" id="taskIn" placeholder="Task To Do">
+            <label for="typeIn">Type: </label>
+            <select class="form-control" id="typeIn">
+                <option>--------</option>
+                <option>Physical Activity</option>
+                <option>Relaxation</option>
+                <option>Eating</option>
+                <option>Coding</option>
+                <option>Chore</option>
+                <option>Other</option>
+            </select>
+            <label for="completeIn">Task Completed: </label>
+            <select class="form-control" id="completeIn">
+                <option>--------</option>
+                <option>Yes</option>
+                <option>No</option>
+            </select>
+            <button class="form-control" class="Yes" id="submitBtn">Submit</button>
+        </form>
     </div>
-        <div>
+        <div class="container-fluid">
             <table class="table">
                 <thead class="thead">
                     <tr>
@@ -52,6 +54,7 @@
 
                 </tbody>
         </table>
-    </div>
+    </div> 
+
 </body>
 </html>
