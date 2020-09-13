@@ -7,7 +7,7 @@ function onReady() {
     //on click event call makeTask
     $(document).on('click', '#submitBtn', makeTask);
     $(document).on('click', '#completedBtn', markAsCompleted);
-    $(document).on('click', '#deleteBtn', deleteTask);
+    $(document).on('click', '#deleteBtn', alertUser);
 }
 
 function makeTask() {
@@ -84,20 +84,36 @@ function markAsCompleted() {
         alert("something went wrong");
     })
 }
-function deleteTask() {
-    console.log('made it into deleteTask');
-    let taskId = $(this).data('id');
-    console.log('this is the id number of this task', taskId)
-    $.ajax({
-    method: 'DELETE',
-    url: `/tasks/${taskId}` 
-    }).then( function( response ){
-    console.log("Deleted!", response);
-    // Refresh page (aka do another GET request)
-    getTasks();
-    }).catch( function(err){
-    console.log("Error in delete", err);
-    alert("had an error in deleteTask");
-    });
+function alertUser() {
+swal({
+    title: "Are you sure?",
+    icon: "warning",
+    buttons: true,
+    dangerMode: true,
+  })
+  .then((deleteTask) => {
+    if (deleteTask) {
+        console.log('made it into deleteTask');
+        let taskId = $(this).data('id');
+        console.log('this is the id number of this task', taskId)
+        $.ajax({
+        method: 'DELETE',
+        url: `/tasks/${taskId}` 
+        }).then( function( response ){
+        console.log("Deleted!", response);
+        // Refresh page (aka do another GET request)
+        getTasks();
+        }).catch( function(err){
+        console.log("Error in delete", err);
+        alert("had an error in deleteTask");
+        });
+      swal("Task Deleted", {
+        icon: "success",
+      });
+    } else {
+      swal({
+          title: "Task is still on List"});
+    }
+  });  
 }
 
