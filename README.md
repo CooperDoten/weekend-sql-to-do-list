@@ -9,6 +9,10 @@ Created an app where a user can input a task to complete and mark them as comple
 
 In building this app I practiced skills for full stack integration, connecting a jQuery powered front-end through a node server to a SQL database. 
 
+## Screenshots
+
+![screenshot](./app_screenshot.png)
+
 ## Prerequisites
 
 To run this app you will need:
